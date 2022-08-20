@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.8.9 on darwin)" generated="20220813 20:41:11.875" rpa="false" schemaversion="3">
+<suite id="s1" name="Configure Tc" source="/Users/sohanr/PycharmProjects/Robot_practise/configure_tc.robot">
+<kw name="Test Suite Setup" type="SETUP">
+<doc>To initialise connection to the device</doc>
+<kw name="Connect To Device" library="functions">
+<var>${conn}</var>
+<arg>${device.ip}</arg>
+<arg>${device.user}</arg>
+<arg>${device.pwd}</arg>
+<arg>${device.port}</arg>
+<msg timestamp="20220813 20:41:15.153" level="INFO">[host 66.129.234.215 session-id 22230] initialized: session-id=22230 | server_capabilities=&lt;dict_keyiterator object at 0x1066f9f90&gt;</msg>
+<msg timestamp="20220813 20:41:15.153" level="INFO">${conn} = Device(66.129.234.215)</msg>
+<status status="PASS" starttime="20220813 20:41:12.058" endtime="20220813 20:41:15.153"/>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<arg>${conn}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<msg timestamp="20220813 20:41:15.153" level="INFO">${conn} = Device(66.129.234.215)</msg>
+<status status="PASS" starttime="20220813 20:41:15.153" endtime="20220813 20:41:15.153"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:12.058" endtime="20220813 20:41:15.153"/>
+</kw>
+<test id="s1-t1" name="TC - Pre checks before the configuration change &amp; config backup" line="9">
+<kw name="Sanity Checks">
+<arg>${conn}</arg>
+<doc>list of checks to run before and after a configuration change</doc>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying Interface UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:15.154" endtime="20220813 20:41:15.154"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Interface Up Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Interface Up Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify number of interfaces that are UP</doc>
+<kw name="Intf Up Count" library="functions">
+<var>${int_up}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:15.155" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:19.815" level="INFO">${int_up} = 48</msg>
+<status status="PASS" starttime="20220813 20:41:15.155" endtime="20220813 20:41:19.815"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${int_up}</arg>
+<arg>${interface.up_count}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:19.815" endtime="20220813 20:41:19.817"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:15.155" endtime="20220813 20:41:19.817"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:15.154" endtime="20220813 20:41:19.817"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying OSPF Neighbor UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:19.818" endtime="20220813 20:41:19.821"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Ospf Neighbor Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Ospf Neighbor Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify number OSPF neighbors in Full State</doc>
+<kw name="Ospf Nbr Count" library="functions">
+<var>${ospf_full}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:19.824" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:20.188" level="INFO">${ospf_full} = 3</msg>
+<status status="PASS" starttime="20220813 20:41:19.823" endtime="20220813 20:41:20.188"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${ospf_full}</arg>
+<arg>${ospf.nbr_full}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:20.188" endtime="20220813 20:41:20.191"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:19.822" endtime="20220813 20:41:20.191"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:19.822" endtime="20220813 20:41:20.191"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying BGP Peer UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:20.191" endtime="20220813 20:41:20.192"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>BGP Neighbor Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="BGP Neighbor Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify the number of BGP Peers that are UP</doc>
+<kw name="Bgp Up Count" library="functions">
+<var>${bgp_up}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:20.193" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:20.566" level="INFO">${bgp_up} = 1</msg>
+<status status="PASS" starttime="20220813 20:41:20.193" endtime="20220813 20:41:20.566"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${bgp_up}</arg>
+<arg>${bgp.peers_up}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:20.566" endtime="20220813 20:41:20.567"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.192" endtime="20220813 20:41:20.567"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.192" endtime="20220813 20:41:20.567"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying System Alarms</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:20.567" endtime="20220813 20:41:20.568"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>System Alarm Check</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="System Alarm Check" library="my_keywords">
+<arg>${conn}</arg>
+<doc>keyword to check and verify system alarm count</doc>
+<kw name="Sys Alarm Check" library="functions">
+<var>${sys_alarms}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:20.568" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:20.987" level="INFO">${sys_alarms} = 2</msg>
+<status status="PASS" starttime="20220813 20:41:20.568" endtime="20220813 20:41:20.987"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${sys_alarms}</arg>
+<arg>${system_alarms.active_count}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:20.987" endtime="20220813 20:41:20.990"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.568" endtime="20220813 20:41:20.990"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.568" endtime="20220813 20:41:20.990"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:15.154" endtime="20220813 20:41:20.990"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${configure.save_cfg}==True</arg>
+<arg>run keyword and continue on failure</arg>
+<arg>Config Backup</arg>
+<arg>${conn}</arg>
+<arg>${configure.save_format}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Config Backup</arg>
+<arg>${conn}</arg>
+<arg>${configure.save_format}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Config Backup" library="my_keywords">
+<arg>${conn}</arg>
+<arg>${configure.save_format}</arg>
+<doc>keyword to save the config before making changes, format can be set, json, xml.</doc>
+<kw name="Cfg Back" library="functions">
+<var>${filename}</var>
+<arg>${device}</arg>
+<arg>${cfg_format}</arg>
+<msg timestamp="20220813 20:41:20.995" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:21.399" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:23.457" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:23.852" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:24.888" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:40.600" level="INFO">${filename} = vMX1</msg>
+<status status="PASS" starttime="20220813 20:41:20.994" endtime="20220813 20:41:40.601"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nBackup Filename: ${filename}\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:40.601" endtime="20220813 20:41:40.601"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.993" endtime="20220813 20:41:40.601"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.992" endtime="20220813 20:41:40.601"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:20.991" endtime="20220813 20:41:40.601"/>
+</kw>
+<doc>In this testcase various network functions will be checked and matched against a given set
+of ideal values. Test Case would fail if there are any mismatches</doc>
+<status status="PASS" starttime="20220813 20:41:15.153" endtime="20220813 20:41:40.602"/>
+</test>
+<test id="s1-t2" name="TC - Configuring the device" line="19">
+<kw name="Set Variable" library="BuiltIn">
+<var>${config_vars}</var>
+<arg>${configure.intf1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220813 20:41:40.604" level="INFO">${config_vars} = {'name': 'ge-0/0/4', 'unit': 0, 'ipv4_addr': '192.168.1.1/24', 'ipv6_addr': '1::1/64', 'descr': 'Testing RF', 'family': 'inet', 'group': 'ALL'}</msg>
+<status status="PASS" starttime="20220813 20:41:40.603" endtime="20220813 20:41:40.604"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Configuring Device</arg>
+<arg>${conn}</arg>
+<arg>${config_vars}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Configuring Device" library="my_keywords">
+<arg>${conn}</arg>
+<arg>${config_vars}</arg>
+<doc>keyword to make the required config changes</doc>
+<kw name="Configuration" library="functions">
+<var>${result}</var>
+<var>${diff}</var>
+<arg>${device}</arg>
+<arg>${config_vars}</arg>
+<msg timestamp="20220813 20:41:40.605" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:40.971" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:41.334" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:41.774" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:44.228" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:44.634" level="INFO">${result} = True</msg>
+<msg timestamp="20220813 20:41:44.634" level="INFO">${diff} = 
+[edit groups ALL interfaces &lt;*&gt;]
++    mtu 1400;
+[edit interfaces]
++   ge-0/0/4 {
++       apply-groups ALL;
++       unit 0 {
++           description "Testing RF";
++           family inet {
++          ...</msg>
+<status status="PASS" starttime="20220813 20:41:40.605" endtime="20220813 20:41:44.634"/>
+</kw>
+<kw name="Should Be True" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220813 20:41:44.635" endtime="20220813 20:41:44.635"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nConfiguration applied successfully!</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:44.636" endtime="20220813 20:41:44.636"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\n~~~~ Config Diff ~~~~\n${diff}\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:44.637" endtime="20220813 20:41:44.637"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:40.604" endtime="20220813 20:41:44.638"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:40.604" endtime="20220813 20:41:44.638"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nWait for 5sec before starting the Post checks</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:44.638" endtime="20220813 20:41:44.639"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20220813 20:41:49.641" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20220813 20:41:44.639" endtime="20220813 20:41:49.641"/>
+</kw>
+<doc>Configure the device using "config.conf" as the Jinja2 template, with variables from var.yml</doc>
+<status status="PASS" starttime="20220813 20:41:40.602" endtime="20220813 20:41:49.642"/>
+</test>
+<test id="s1-t3" name="TC - Post checks after the configuration change" line="26">
+<kw name="Sanity Checks">
+<arg>${conn}</arg>
+<doc>list of checks to run before and after a configuration change</doc>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying Interface UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:49.646" endtime="20220813 20:41:49.646"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Interface Up Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Interface Up Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify number of interfaces that are UP</doc>
+<kw name="Intf Up Count" library="functions">
+<var>${int_up}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:49.649" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:53.702" level="INFO">${int_up} = 48</msg>
+<status status="PASS" starttime="20220813 20:41:49.648" endtime="20220813 20:41:53.702"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${int_up}</arg>
+<arg>${interface.up_count}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:53.703" endtime="20220813 20:41:53.705"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:49.647" endtime="20220813 20:41:53.705"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:49.647" endtime="20220813 20:41:53.705"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying OSPF Neighbor UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:53.706" endtime="20220813 20:41:53.706"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>Ospf Neighbor Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="Ospf Neighbor Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify number OSPF neighbors in Full State</doc>
+<kw name="Ospf Nbr Count" library="functions">
+<var>${ospf_full}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:53.708" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:54.074" level="INFO">${ospf_full} = 0</msg>
+<status status="PASS" starttime="20220813 20:41:53.707" endtime="20220813 20:41:54.075"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${ospf_full}</arg>
+<arg>${ospf.nbr_full}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<msg timestamp="20220813 20:41:54.077" level="FAIL">0 != 3</msg>
+<status status="FAIL" starttime="20220813 20:41:54.075" endtime="20220813 20:41:54.077"/>
+</kw>
+<status status="FAIL" starttime="20220813 20:41:53.707" endtime="20220813 20:41:54.078"/>
+</kw>
+<status status="FAIL" starttime="20220813 20:41:53.706" endtime="20220813 20:41:54.078"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying BGP Peer UP count</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:54.079" endtime="20220813 20:41:54.079"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>BGP Neighbor Count</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="BGP Neighbor Count" library="my_keywords">
+<arg>${conn}</arg>
+<doc>Keyword to check and verify the number of BGP Peers that are UP</doc>
+<kw name="Bgp Up Count" library="functions">
+<var>${bgp_up}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:54.081" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:54.451" level="INFO">${bgp_up} = 1</msg>
+<status status="PASS" starttime="20220813 20:41:54.080" endtime="20220813 20:41:54.451"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${bgp_up}</arg>
+<arg>${bgp.peers_up}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:54.452" endtime="20220813 20:41:54.454"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:54.080" endtime="20220813 20:41:54.454"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:54.079" endtime="20220813 20:41:54.454"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>\nVerifying System Alarms</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220813 20:41:54.454" endtime="20220813 20:41:54.455"/>
+</kw>
+<kw name="Run Keyword And Continue On Failure" library="BuiltIn">
+<arg>System Alarm Check</arg>
+<arg>${conn}</arg>
+<doc>Runs the keyword and continues execution even if a failure occurs.</doc>
+<kw name="System Alarm Check" library="my_keywords">
+<arg>${conn}</arg>
+<doc>keyword to check and verify system alarm count</doc>
+<kw name="Sys Alarm Check" library="functions">
+<var>${sys_alarms}</var>
+<arg>${device}</arg>
+<msg timestamp="20220813 20:41:54.457" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'ExecuteRpc'</msg>
+<msg timestamp="20220813 20:41:54.821" level="INFO">${sys_alarms} = 2</msg>
+<status status="PASS" starttime="20220813 20:41:54.456" endtime="20220813 20:41:54.821"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${sys_alarms}</arg>
+<arg>${system_alarms.active_count}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20220813 20:41:54.822" endtime="20220813 20:41:54.823"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:54.455" endtime="20220813 20:41:54.823"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:54.455" endtime="20220813 20:41:54.823"/>
+</kw>
+<status status="FAIL" starttime="20220813 20:41:49.645" endtime="20220813 20:41:54.824"/>
+</kw>
+<doc>In this testcase various network functions will be checked and matched against a given set
+of ideal values. Test Case would fail if there are any mismatches</doc>
+<status status="FAIL" starttime="20220813 20:41:49.643" endtime="20220813 20:41:54.825">0 != 3</status>
+</test>
+<kw name="Test Suite Teardown" type="TEARDOWN">
+<doc>To close the connection to the device gracefully</doc>
+<kw name="Teardown" library="functions">
+<arg>${conn}</arg>
+<msg timestamp="20220813 20:41:54.827" level="INFO">[host 66.129.234.215 session-id 22230] Requesting 'CloseSession'</msg>
+<status status="PASS" starttime="20220813 20:41:54.826" endtime="20220813 20:41:55.193"/>
+</kw>
+<status status="PASS" starttime="20220813 20:41:54.826" endtime="20220813 20:41:55.194"/>
+</kw>
+<status status="FAIL" starttime="20220813 20:41:11.876" endtime="20220813 20:41:55.194"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="2" fail="1" skip="0" id="s1" name="Configure Tc">Configure Tc</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

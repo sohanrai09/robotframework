@@ -1,0 +1,45 @@
+set version 21.1R3.11
+set groups ALL interfaces &lt;*&gt; gigether-options no-auto-negotiation
+set system host-name vMX1
+set system root-authentication encrypted-password "$6$w0uV/Veg$MxUKS00aYKDRZKuI13guEQ3yhv0XjZ5vDD/xBSVatXwzxvgMZCjERUu5kEpMaRzFDhrcyf8NLW8lQiM.KpUCE1"
+set system scripts language python
+set system login user jcladmin uid 2000
+set system login user jcladmin class super-user
+set system login user jcladmin authentication encrypted-password "$6$COH4QgW/$uFzZAk1fYdnuwVl5WUjhb/4JdtSWIq7y/eCqB3qEFLFK/QBeG1C686NzW0XL0sz8qX4bzyYW0uMIBNXK47Kw7."
+set system login user jcluser uid 2001
+set system login user jcluser class super-user
+set system login user jcluser authentication encrypted-password "$6$G44rGtvQ$I3jMwJk.0/CbTlhEoZzoDGv9dcFuZYdKvNFHiZwZ6s5Lktf/vMHipZxDwEXxgtid.dmN5K27fMBYwKnSijiQ/."
+set system login user robot uid 2002
+set system login user robot class super-user
+set system login user robot authentication encrypted-password "$6$ANKSzK04$Wi.637/gWVVsVvrVq3QamQ2200M/vv.M0bZHxxQZo1.wjkeVfqdGz18hy34F9PReEPP3FBOOufiksXdvtBVZX/"
+set system services ssh root-login allow
+set system services netconf ssh
+set system services rest http port 3000
+set system services rest enable-explorer
+set system syslog user * any emergency
+set system syslog file messages any notice
+set system syslog file messages authorization info
+set system syslog file interactive-commands interactive-commands any
+set system processes dhcp-service traceoptions file dhcp_logfile
+set system processes dhcp-service traceoptions file size 10m
+set system processes dhcp-service traceoptions level all
+set system processes dhcp-service traceoptions flag all
+set chassis fpc 0 pic 0 number-of-ports 8
+set chassis fpc 0 lite-mode
+set interfaces ge-0/0/0 apply-groups ALL
+set interfaces ge-0/0/0 unit 0 family inet address 10.100.12.1/24
+set interfaces ge-0/0/1 apply-groups ALL
+set interfaces ge-0/0/1 unit 0 family inet address 10.100.14.1/24
+set interfaces ge-0/0/2 apply-groups ALL
+set interfaces ge-0/0/2 unit 0 family inet address 10.100.13.1/24
+set interfaces fxp0 unit 0 family inet address 100.123.1.0/16
+set interfaces lo0 unit 0 family inet address 10.100.100.1/32
+set protocols bgp group IBGP type internal
+set protocols bgp group IBGP local-address 10.100.100.1
+set protocols bgp group IBGP neighbor 10.100.100.2
+set protocols ospf area 0.0.0.0 interface ge-0/0/0.0
+set protocols ospf area 0.0.0.0 interface ge-0/0/1.0
+set protocols ospf area 0.0.0.0 interface ge-0/0/2.0
+set protocols ospf area 0.0.0.0 interface lo0.0
+set routing-options autonomous-system 100
+set routing-options static route 0.0.0.0/0 next-hop 100.123.0.1

@@ -1,0 +1,25 @@
+---
+device:
+    ip: '66.129.234.215'
+    user: 'robot'
+    pwd: 'robot123'
+    port: '34003'
+interface:
+    up_count: 48
+ospf:
+    nbr_full: 3
+bgp:
+  peers_up: 1
+system_alarms:
+  active_count: 2
+configure:
+  intf1:
+    name: 'ge-0/0/4'
+    unit: 0
+    ipv4_addr: '192.168.1.1/24'
+    ipv6_addr: '1::1/64'
+    descr: "Testing RF"
+    family: inet
+    group: ALL
+  save_cfg: True
+  save_format: set
